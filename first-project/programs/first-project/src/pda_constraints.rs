@@ -46,3 +46,16 @@ pub struct InstructionAccountsWithSpecifiedBump<'info> {
 pub struct CustomAccount {
     pub bump_seed: u8,
 }
+
+
+// Use this constraint when your instruction needs to interact with PDA accounts created by another program.
+// #[derive(Accounts)]
+// pub struct InstructionAccountsWithSeedsProgram<'info> {
+//     #[account(
+//         seeds = [b"hello world"],
+//         bump,
+//         seeds::program = other_program.key(),
+//     )]
+//     pub pda_account: SystemAccount<'info>,
+//     pub other_program: Program<'info, OtherProgram>
+// }
