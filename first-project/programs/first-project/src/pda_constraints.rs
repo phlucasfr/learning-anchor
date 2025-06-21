@@ -59,3 +59,19 @@ pub struct CustomAccount {
 //     pub pda_account: SystemAccount<'info>,
 //     pub other_program: Program<'info, OtherProgram>
 // }
+
+#[derive(Accounts)]
+pub struct InstructionAccountsWithInit<'info> {
+    #[account(mut)]
+    pub signer: Signer<'info>,
+
+    #[account(
+        init, 
+        payer = signer,
+        space = 8 + 1,
+        seeds = [b"hello_world", signer.key().as_ref()],
+        bump,
+    )]
+    pub pda_account: Account<'info, CustomAccount>,
+    pub system_program: Program<'info, System>
+}
